@@ -5,7 +5,7 @@
 |Column                   |Type         |Options                        |
 |-------------------------|-------------|-------------------------------|
 |nickname                 |string       |null: false                    |
-|email                    |string       |unique: true                   |
+|email                    |string       |null: false, unique: true      |
 |encrypted_password       |string       |null: false                    |
 |last_name                |string       |null: false                    |
 |first_name               |string       |null: false                    |
@@ -74,10 +74,9 @@
 |municipality   |string       |null: false                    |
 |address        |string       |null: false                    |
 |building       |string       |                               |
+|phone_number   |integer      |null: false                    |
 |order          |references   |null: false, foreign_key: true |
-|user           |references   |null: false, foreign_key: true |
 
 ### Association
 
 - belongs_to :order
-- belongs_to :user
