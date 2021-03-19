@@ -5,7 +5,7 @@
 |Column                   |Type         |Options                        |
 |-------------------------|-------------|-------------------------------|
 |nickname                 |string       |null: false                    |
-|email                    |string       |null: false                    |
+|email                    |string       |unique: true                   |
 |encrypted_password       |string       |null: false                    |
 |last_name                |string       |null: false                    |
 |first_name               |string       |null: false                    |
@@ -24,8 +24,7 @@
 |Column             |Type         |Options                        |
 |-------------------|-------------|-------------------------------|
 |item_name          |string       |null: false                    |
-|item_info          |string       |null: false                    |
-|item_detail        |text         |                               |
+|item_detail        |text         |null: false                    |
 |item_status_id     |integer      |null: false                    |
 |category_id        |integer      |null: false                    |
 |price              |integer      |null: false                    |
@@ -74,8 +73,11 @@
 |prefecture_id  |integer      |null: false                    |
 |municipality   |string       |null: false                    |
 |address        |string       |null: false                    |
+|building       |string       |                               |
 |order          |references   |null: false, foreign_key: true |
+|user           |references   |null: false, foreign_key: true |
 
 ### Association
 
--belongs_to :order
+- belongs_to :order
+- belongs_to :user
