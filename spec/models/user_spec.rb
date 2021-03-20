@@ -40,6 +40,18 @@ RSpec.describe User, type: :model do
         @user.valid?
         expect(@user.errors.full_messages).to include("Password confirmation doesn't match Password")
       end
+      it 'ユーザー本名は名字と名前が空では登録できない' do
+        @user.last_name = ""
+        @user.first_name = ""
+        @user.valid?
+        expect(@user.errors.full_messages).to include("Last name can't be blank", "Last name is invalid", "First name can't be blank", "First name is invalid")
+      end
+      it 'ユーザ本名のフリガナは、名字と名前が空では登録できない' do
+        @user.last_furigana = ""
+        @user.first_furigana = ""
+        @user.valid?
+        expect(@user.errors.full_messages).to include("Last furigana can't be blank", "Last furigana is invalid", "First furigana can't be blank", "First furigana is invalid")
+      end
       it 'last_nameは全角（漢字・ひらがな・カタカナ）でないと登録できない' do
         @user.last_name = "11111"
         @user.valid?
@@ -56,7 +68,7 @@ RSpec.describe User, type: :model do
         expect(@user.errors.full_messages).to include("Last furigana is invalid")
       end
       it 'first_furiganaは全角カタカナでないと登録できない' do
-        @user.first_furigana = "あああああ"
+        @user.first_furigana = "やまだ"
         @user.valid?
         expect(@user.errors.full_messages).to include("First furigana is invalid")
       end
