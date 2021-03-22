@@ -13,6 +13,10 @@ class User < ApplicationRecord
     validates :first_furigana, format: { with: /\A[ァ-ヶ　ー－]+\z/}
     validates :password, format: { with: /\A(?=.*?[a-z])(?=.*?[\d])[a-z\d]+\z/i}
   end
+
+  has_many :items
+  has_many :comments
+  has_many :orders
 end
 
 # 修正前=================================================
