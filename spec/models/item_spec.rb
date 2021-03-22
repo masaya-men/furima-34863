@@ -88,6 +88,26 @@ RSpec.describe Item, type: :model do
         @item.valid?
         expect(@item.errors.full_messages).to include("Price  must be inputted between ¥300 and ¥9,999,999")
       end
+      it '価格は全角文字では出品できない' do
+        @item.price = "１００"
+        @item.valid?
+        expect(@item.errors.full_messages).to include("Price  must be inputted between ¥300 and ¥9,999,999")
+      end
+      it '半角英数混合では出品できない' do
+        @item.price = "333aaa"
+        @item.valid?
+        expect(@item.errors.full_messages).to include("Price  must be inputted between ¥300 and ¥9,999,999")
+      end
+      it '半角英字だけでは出品できない' do
+        @item.price = "aaaaaa"
+        @item.valid?
+        expect(@item.errors.full_messages).to include("Price  must be inputted between ¥300 and ¥9,999,999")
+      end
+      it '¥10,000,000以上では登録できない' do
+        @item.price = 10000000
+        @item.valid?
+        expect(@item.errors.full_messages).to include("Price  must be inputted between ¥300 and ¥9,999,999")
+      end
     end
   end
 end

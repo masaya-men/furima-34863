@@ -15,8 +15,8 @@ class User < ApplicationRecord
   end
 
   has_many :items
-  has_many :comments
-  has_many :orders
+  # has_many :comments
+  # has_many :orders後に実装のためコメントアウト
 end
 
 # 修正前=================================================
