@@ -1,7 +1,8 @@
 class ItemsController < ApplicationController
   before_action :authenticate_user!, only: [:new, :create, :edit]
   before_action :set_params, only: [:show, :edit]
-  before_action :item_params, only: :update
+  before_action :back_to_index, only: [:edit]
+  # before_action :item_params, only: :update
 
   def index
     @items = Item.order("created_at DESC")
@@ -21,18 +22,13 @@ class ItemsController < ApplicationController
   end
 
   def show
-    # @item = Item.find(params[:id])LGTM後に消す
   end
 
   def edit
-    unless current_user.id == @item.user_id
-      redirect_to root_path
-    end
-    # @item = Item.find(params[:id])
   end
 
   def update
-    @item = Item.find(params[:id])
+    set_params
     if @item.update(item_params)
       redirect_to item_path(params[:id])
     else
@@ -49,5 +45,11 @@ class ItemsController < ApplicationController
 
   def set_params
     @item = Item.find(params[:id])
+  end
+
+  def back_to_index
+    unless current_user.id == @item.user_id
+      redirect_to root_path
+    end
   end
 end
