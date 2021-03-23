@@ -1,7 +1,7 @@
 class ItemsController < ApplicationController
   before_action :authenticate_user!, only: [:new, :create, :edit, :update]
-  before_action :set_params, only: [:show, :edit, :update]
-  before_action :back_to_index, only: [:edit, :update]
+  before_action :set_params, only: [:show, :edit, :update, :destroy]
+  before_action :back_to_index, only: [:edit, :update, :destroy]
   # before_action :item_params, only: :update一度パラメーターでエラー有、LGTMまで残す
 
   def index
@@ -36,8 +36,7 @@ class ItemsController < ApplicationController
   end
 
   def destroy
-    item = Item.find(params[:id])
-    item.destroy
+    @item.destroy
     redirect_to root_path
   end
 
