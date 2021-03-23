@@ -9,7 +9,7 @@ class Item < ApplicationRecord
   end
   
   with_options presence: true, numericality: { other_than: 1, message: ' must be selected' } do
-    validates :item_status_id
+    validates :status_id
     validates :category_id
     validates :shipping_charge_id
     validates :shipping_day_id

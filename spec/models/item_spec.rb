@@ -39,12 +39,12 @@ RSpec.describe Item, type: :model do
         expect(@item.errors.full_messages).to include("Category  must be selected")
       end
       it '商品の状態が選択されていないと出品できない' do
-        @item.item_status_id = ""
+        @item.status_id = ""
         @item.valid?
         expect(@item.errors.full_messages).to include("Item status can't be blank", "Item status  must be selected")
       end
       it '商品の状態は無選択状態(id:1)では出品できない' do
-        @item.item_status_id = 1
+        @item.status_id = 1
         @item.valid?
         expect(@item.errors.full_messages).to include("Item status  must be selected")
       end
