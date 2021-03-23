@@ -1,8 +1,8 @@
 class ItemsController < ApplicationController
-  before_action :authenticate_user!, only: [:new, :create, :edit]
-  before_action :set_params, only: [:show, :edit]
-  before_action :back_to_index, only: [:edit]
-  # before_action :item_params, only: :update
+  before_action :authenticate_user!, only: [:new, :create, :edit, :update]
+  before_action :set_params, only: [:show, :edit, :update]
+  before_action :back_to_index, only: [:edit, :update]
+  # before_action :item_params, only: :update一度パラメーターでエラー有、LGTMまで残す
 
   def index
     @items = Item.order("created_at DESC")
@@ -28,7 +28,6 @@ class ItemsController < ApplicationController
   end
 
   def update
-    set_params
     if @item.update(item_params)
       redirect_to item_path(params[:id])
     else
