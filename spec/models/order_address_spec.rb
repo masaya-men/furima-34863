@@ -2,7 +2,10 @@ require 'rails_helper'
 
 RSpec.describe OrderAddress, type: :model do
   before do
-    @order_address = FactoryBot.build(:order_address)
+    item = FactoryBot.create(:item)
+    user = FactoryBot.create(:user)
+    sleep 0.1
+    @order_address = FactoryBot.build(:order_address, item_id: item.id, user_id: user.id)
   end
 
   context 'ユーザーが商品を購入できるとき' do
@@ -51,6 +54,21 @@ RSpec.describe OrderAddress, type: :model do
       @order_address.phone_number = "000000000001"
       @order_address.valid?
       expect(@order_address.errors.full_messages).to include("Phone number is invalid", "Phone number is too long (maximum is 11 characters)")
+    end
+    it '電話番号が数字のみでないと登録できないこと' do
+      @order_address.phone_number = "a0000000000"
+      @order_address.valid?
+      expect(@order_address.errors.full_messages).to include("Phone number is invalid")
+    end
+    it '電話番号にハイフンが含まれていると登録できないこと' do
+      @order_address.phone_number = "000-00000000"
+      @order_address.valid?
+      expect(@order_address.errors.full_messages).to include("Phone number is invalid", "Phone number is too long (maximum is 11 characters)")
+    end
+    it '電話番号に全角数字を使用していると登録できないこと' do
+      @order_address.phone_number = "０００００００００００"
+      @order_address.valid?
+      expect(@order_address.errors.full_messages).to include("Phone number is invalid")
     end
   end
 end

@@ -2,7 +2,7 @@ class ItemsController < ApplicationController
   before_action :authenticate_user!, only: [:new, :create, :edit, :update]
   before_action :set_params, only: [:show, :edit, :update, :destroy]
   before_action :back_to_index, only: [:edit, :update, :destroy]
-  # before_action :item_params, only: :update一度パラメーターでエラー有、LGTMまで残す
+  before_action :check_item, only: [:edit, :update]
 
   def index
     @items = Item.order("created_at DESC")
@@ -25,9 +25,6 @@ class ItemsController < ApplicationController
   end
 
   def edit
-    if @item.order.present?
-      redirect_to root_path
-    end
   end
 
   def update
@@ -59,4 +56,11 @@ class ItemsController < ApplicationController
       redirect_to root_path
     end
   end
+
+  def check_item
+    if @item.order.present?
+      redirect_to root_path
+    end
+  end
+
 end

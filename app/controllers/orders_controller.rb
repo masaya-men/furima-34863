@@ -1,14 +1,12 @@
 class OrdersController < ApplicationController
   before_action :item_params, only: [:index, :create]
   before_action :authenticate_user!, only: [:index, :create]
-  before_action :back_to_index, only: [:index]
+  before_action :back_to_index, only: [:index, :create]
+  before_action :check_item, only: [:index, :create]
 
   def index
     # @item = Item.find(params[:item_id])LGTMまで残します
     @order_address = OrderAddress.new
-    if @item.order.present?
-      redirect_to root_path
-    end
   end
 
   def create
@@ -52,6 +50,11 @@ class OrdersController < ApplicationController
     end
   end
 
+  def check_item
+    if @item.order.present?
+      redirect_to root_path
+    end
+  end
 
   # =========LGTMまで残す=============
   # def order_params
