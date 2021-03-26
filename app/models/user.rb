@@ -16,7 +16,7 @@ class User < ApplicationRecord
 
   has_many :items
   # has_many :comments
-  # has_many :orders後に実装のためコメントアウト
+  has_many :orders
 end
 
 # 日本語で出力しようとした===============================================================

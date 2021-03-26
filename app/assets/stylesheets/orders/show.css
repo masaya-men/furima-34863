@@ -1,0 +1,10 @@
+.purchased_order{
+  display: flex;
+  justify-content: center;
+}
+
+.purchased{
+  height: calc( 100vh - 330px );
+  font-size: 20px;
+  padding-top: 100px;
+}
