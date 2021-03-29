@@ -22,7 +22,7 @@ class Item < ApplicationRecord
   belongs_to :shipping_charge
   belongs_to :prefecture
   belongs_to :shipping_day
-  has_many :comments
+  has_many :comments, dependent: :destroy
   has_one :order
   has_one_attached :image
 end

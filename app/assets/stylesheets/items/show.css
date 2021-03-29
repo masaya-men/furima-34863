@@ -205,3 +205,21 @@
   font-weight: bold;
   font-size: 23px;
 }
+
+.comments_content{
+  overflow: scroll;
+  height: 100px;
+  background-color: white;
+  border: 1px double lightgray;
+  text-align: left;
+}
+
+.comment_user_name{
+  font-size: 5px;
+  color: rgb(163, 161, 161);
+}
+
+.comment_comment{
+  margin-left: 30px;
+  font-size: 14px;
+}
