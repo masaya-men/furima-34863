@@ -22,6 +22,8 @@ class ItemsController < ApplicationController
   end
 
   def show
+    @comment = Comment.new
+    @comments = @item.comments.includes(:user)
   end
 
   def edit
@@ -62,5 +64,11 @@ class ItemsController < ApplicationController
       redirect_to root_path
     end
   end
+
+  # コメント機能完了まで残す
+  # def comment_params
+  #   params.require(:comment).permit(:comment)
+  # end
+  # コメント機能完了まで残す
 
 end
